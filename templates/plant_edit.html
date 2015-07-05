@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<script>
+  function update_plant() {
+      if(confirm("Are you sure you want to update this plant?")){
+          var plant_form = document.forms["update_plant_form"];
+          var data = new FormData();
+          data.append('name', plant_form['name'].value);
+          data.append('type', plant_form['type'].value);
+          data.append('description', plant_form['description'].value);
+  
+          var xhr = new XMLHttpRequest();
+          //Specify what URL to hit and what http method to use.
+          xhr.open('PUT', '/plant/{{entry.id}}', true);
+          xhr.onload = function () {
+              //Once the update is finished, go back to plant's listings
+              document.location.href = "/plant/{{entry.id}}";
+          };
+          //Send the actual put(update) request to the server 
+          xhr.send(data);
+      }
+  }
+</script>
+
+
+<a href="/plant/{{entry.id}}"> <== back </a>
+		      
+<form action="/plant" method="post" class="add-entry" name="update_plant_form">
+  <dl>
+    <dt>Name:</dt>
+    <dd><input type="text" size=30 name="name" value="{{entry.name}}"></dd>
+    <dt>Type:</dt>
+    <dd><input type="text" size=30 name="type" value="{{entry.type}}"></dd>
+    <dt>Description:</dt>
+    <dd><textarea name="description" rows=5 cols=40>{{entry.description}}</textarea></dd>
+    <dd><input type="button" value="UPDATE" onclick="update_plant()"></dd>
+  </dl>
+</form>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+table.entries{
+    border-spacing: 0px;
+    border-collapse: separate;
+    border: 1px solid #000;
+}
+
+table.entries td {
+    padding: 5px;
+}
+
+.spansidebysideFormat
+{
+    text-align: left;
+    display: table-cell;
+    min-width: 10px;
+    padding-right: 10px;
+}

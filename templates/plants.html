@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block body %}
+<table class="entries" border="1">
+  <thead>
+    <tr>
+      <td>Name</td>
+      <td>Type</td>
+      <td>Description</td>
+    </tr>
+  </thead>
+  
+  <tbody>
+    {% for entry in entries %}
+    <tr>
+      <td><a href="/plant/{{ entry.id }}">{{ entry.name }}</a></td>
+      <td>{{ entry.type }}</td>
+      <td>{{entry.description|safe }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td><em>Unbelievable.  No entries here so far</em></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<form action="/plant" method="post" class="add-entry">
+  <dl>
+    <dt>Name:</dt>
+    <dd><input type="text" size=30 name="name"></dd>
+    <dt>Type:</dt>
+    <dd><input type="text" size=30 name="type"></dd>
+    <dt>Description:</dt>
+    <dd><textarea name="description" rows=5 cols=40></textarea></dd>
+    <dd><input type="submit" value="Add New Plant"></dd>
+  </dl>
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+<!doctype html>
+<!~--This template is put in every rendered document that is declared to extend layout.html.
+	  This is useful in practice so the header and footer of your website does not have
+	  to be specified in every template file. This tutorial is not great but it does an
+	  ok job of describing the templates:
+	  http://flask.pocoo.org/docs/0.10/tutorial/templates/#tutorial-templates -->
+
+<html>
+  <head>
+    <title>Plant Tracker 9001</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <h1>Plant Tracker 9001</h1>
+      {% for message in get_flashed_messages() %}
+      <div class=flash>{{ message }}</div>
+      {% endfor %}
+      
+      {% block body %}{% endblock %}
+    </body>
+</html
