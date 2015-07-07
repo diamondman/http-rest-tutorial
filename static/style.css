@@ -8,10 +8,13 @@ table.entries td {
     padding: 5px;
 }
 
-.spansidebysideFormat
-{
+.spansidebysideFormat {
     text-align: left;
     display: table-cell;
     min-width: 10px;
     padding-right: 10px;
+}
+
+em.tut_action {
+    color: #FF0000
 }

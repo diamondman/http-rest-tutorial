@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 
 """Every library has some form of suggested startup.
@@ -108,6 +108,20 @@ def plant_delete_view(plantid):
     db.session.commit()
     #No need to render a template since this endpoint can only be accessed through javascript.
     return "SUCCESS"
+
+
+####################################################################
+####################Tutorial routes#################################
+#These are for showing how http and rest work with mostly templates#
+####################################################################
+@app.route("/tutorial")
+def tutorials_view():
+    return redirect("/tutorial/1")
+
+@app.route("/tutorial/<int:tut_num>")
+def tutorial_view(tut_num):
+    return render_template("tutorial_%d.html"%tut_num, tut_num=tut_num)
+
 
 #http://stackoverflow.com/questions/419163/what-does-if-name-main-do
 if __name__ == '__main__':

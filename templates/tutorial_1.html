@@ -1,0 +1,56 @@
+{% extends "tutorial_layout.html" %}
+{% block body %}
+<h3>Understanding the HTTP Request</h3>
+
+<p>Congradulations, </p>
+<p>By seeing this page you have successfully sent an HTTP 'GET' request to '{{request.host+request.full_path}}' (you can ignore the question mark) and the web server responded with this page. We will explore what that means below.</p>
+
+<p>For anyone who does not know, let's define a few terms before going forward.</p>
+<ul>
+  <li><strong>Hypertext:</strong> A document displayed on a computer that has links to other documents and supports embedding resources like pictures. Web pages are the most common example of Hypertext.</li>
+  <li><strong>Hypertext Markup Language (HTML):</strong> A set of symbols and words that form a language for describing the structure of a hypertext document (webpage). For example, to make something bold in HTML we can write &lt;strong&gt;something bold&lt;/strong&gt;. Web browsers read HTML, interpret these 'tags' and build the web page to display to us.</li>
+  <li><strong>Hypertext Transfer Protocol (HTTP):</strong> A protocol to send hypertext documents between two computers (usually a client and a server). As the name implies, HTTP was primarily made for transferring HTML; however other types of data can be transferred. This is why most URLs start with 'http://', it tells the web browser what protocol to talk to the server with.</li>
+</ul>
+
+<h3>HTTP GET, you use it all the time.</h3>
+
+<p>From these definitions and years of using a web browser, it is hopefully clear what I mean when I say you made a http request (tried to load a web page) and got a response (the page loaded). The potentially new idea is the 'HTTP Method'. The 'method' is just a work sent to the server with every HTTP request, along with the URL. You can think of it as what to do with the url. For now we will stick with one method type: 'GET'. GET simply means 'send me back the resource specified by the URL.' </p>
+
+<p>Every time you type a website URL into your address bar and hit enter (or otherwise navigate to a web page) you are sending an HTTP GET request to a server. If you get anything back besides 'timeout' or 'host not found' then you received an HTTP response from the server. Even errors like '404 file not found' are responses from the server; the server told you it does not have that file.</p>
+
+<h3>Required Details About HTTP</h3>
+
+<p>Messages in http can contain two main parts: <strong>Headers</strong>, and a <strong>Body</strong>. Headers are metadata: details about the message but not the actual payload of the message itself. The body is the actual document being sent.</p>
+
+<p>HTTP Requests contain only headers. These headers specify the URL and HTTP Method we are asking the web server to give us. </p>
+<p>HTTP Responses contain headers and a body. The Body is the content of a file (HTML, an image, etc). The headers describe the body, giving details like Status code (200 success, 404 file not found), and format of the body (is it html, or an image, etc).
+
+  The response contained the HTML for this page, but the response contained something else too; metadata about the page called <strong>Headers</strong>. The request from the browser also contains headers, but these headers specify the url and HTTP Method we are asking the server for.</p>
+
+<h3>Your Browser and HTTP</h3>
+<p>When your browser sent the HTTP request to load this page, it got back an HTTP response. The browser checked the the headers of the response and determined that the page was HTML. Next the browser grabbed the Body data from the response and interpreted it as html to build the page you see before you.</p>
+
+<p>Metadata about webpages that is not displayed in the page itself may seem weird, but we can actually look at the details of all http messages that pass through the browser. We will do this with what is called the Browser's <strong>Inspecter</strong>.</p>
+
+<p>Most modern browsers have features for web developers to debug the webpage. The <strong>Inspecter</strong> is the primary tool. The inspector lets you do many things including see the details of HTTP requests and responses.</p>
+
+<p><strong>Follow along as we inspect the http requests that made this page possible.</strong></p>
+
+<p>If you are in Firefox or Google Chrome, <em class="tut_action">hit the F12 key</em> to open up the Inspector window. The Inspecter pane should appear in the bottom of your browser. <em class="tut_action">Click the <strong>Network</strong></em> tab to open the Network Inspecter.</p>
+
+<p>The Network Inspecter will be blank. The Network Inspecter has to be on to monitor HTTP activity, so it did not catch when you first loaded the page. We can get it to intercept the message by simply refreshing the page. Once that is done you should see something like the following (You might want to open it in a new tab):</p>
+<a href="/static/tutorial_1_inspector.png"><img src="/static/thumb.tutorial_1_inspector.png"/></a>
+
+<p>In the network inspector you should be able to see three requests for this page.</p>
+<ul>
+  <li><strong>1</strong> - This page</li>
+  <li><strong>style.css</strong> - Style sheet information to make things look pretty</li>
+  <li><strong>thumb.tutorial_1_inspector.png</strong> - The previous image</li>
+</ul>
+<p>The presense of 3 requests may seem odd, after all we only loaded one web page. But the page we loaded was html! Hypertext documents can link to other resources (images, etc) and the browser will go get them for the page. The server does not send you all the resources at once. The browser goes and fetches each resource which allows a page to be made of resources from multiple websited.
+
+  If you want to view the HTML that produced the page you can at any time by pressing CTRL+U.) It may seem counter intuative, but the webserver does not send all the images at the same time it sends the page. The browser is responsible for determining what additional resources the HTML file needs and then fetching each of them.</p>
+
+
+<p>Clicking any of the entries in the table will show more details about that request.</p>
+{% endblock %}
