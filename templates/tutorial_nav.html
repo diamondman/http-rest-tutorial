@@ -1,0 +1,12 @@
+{% if tut_num != 1 %}
+<a href="/tutorial/{{tut_num-1}}">&lt;-PREV</a>
+{% else %}
+<strong>FIRST</strong>
+{% endif %}
+
+
+{% if is_not_last %}
+<a href="/tutorial/{{tut_num+1}}">NEXT-&gt;</a>
+{% else %}
+<strong>END</strong>
+{% endif %}

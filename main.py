@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, request, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
+from os import path
 
 """Every library has some form of suggested startup.
    Here is Flask's http://flask.pocoo.org/docs/0.10/quickstart/"""
@@ -120,7 +121,12 @@ def tutorials_view():
 
 @app.route("/tutorial/<int:tut_num>")
 def tutorial_view(tut_num):
-    return render_template("tutorial_%d.html"%tut_num, tut_num=tut_num)
+    """from bs4 import BeautifulSoup
+    soup = BeautifulSoup(render_template("tutorial_%d.html"%tut_num, tut_num=tut_num),
+                         'html.parser')
+    return soup.prettify()"""
+    return render_template("tutorial_%d.html"%tut_num, tut_num=tut_num,
+                           is_not_last=path.isfile("templates/tutorial_%d.html"%(tut_num+1)))
 
 
 #http://stackoverflow.com/questions/419163/what-does-if-name-main-do

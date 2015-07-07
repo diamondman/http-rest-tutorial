@@ -2,7 +2,7 @@
 {% block body %}
 <h3>Understanding the HTTP Request</h3>
 
-<p>Congradulations, </p>
+<p>Congratulations, </p>
 <p>By seeing this page you have successfully sent an HTTP 'GET' request to '{{request.host+request.full_path}}' (you can ignore the question mark) and the web server responded with this page. We will explore what that means below.</p>
 
 <p>For anyone who does not know, let's define a few terms before going forward.</p>
@@ -36,21 +36,41 @@
 
 <p><strong>Follow along as we inspect the http requests that made this page possible.</strong></p>
 
-<p>If you are in Firefox or Google Chrome, <em class="tut_action">hit the F12 key</em> to open up the Inspector window. The Inspecter pane should appear in the bottom of your browser. <em class="tut_action">Click the <strong>Network</strong></em> tab to open the Network Inspecter.</p>
+<p>If you are in Firefox or Google Chrome, <em class="tut_action">hit the F12 key</em> to open up the Inspector pane1. The Inspecter pane should appear in the bottom of your browser. <em class="tut_action">Click the <strong>Network</strong> tab</em> to open the Network Inspecter.</p>
 
 <p>The Network Inspecter will be blank. The Network Inspecter has to be on to monitor HTTP activity, so it did not catch when you first loaded the page. We can get it to intercept the message by simply refreshing the page. Once that is done you should see something like the following (You might want to open it in a new tab):</p>
 <a href="/static/tutorial_1_inspector.png"><img src="/static/thumb.tutorial_1_inspector.png"/></a>
 
-<p>In the network inspector you should be able to see three requests for this page.</p>
+<p>In the network inspector you should be able to see four requests for this page.</p>
 <ul>
   <li><strong>1</strong> - This page</li>
   <li><strong>style.css</strong> - Style sheet information to make things look pretty</li>
   <li><strong>thumb.tutorial_1_inspector.png</strong> - The previous image</li>
+  <li><strong>thumb.tutorial_1_inspector_details.png</strong> - The Next image</li>
 </ul>
-<p>The presense of 3 requests may seem odd, after all we only loaded one web page. But the page we loaded was html! Hypertext documents can link to other resources (images, etc) and the browser will go get them for the page. The server does not send you all the resources at once. The browser goes and fetches each resource which allows a page to be made of resources from multiple websited.
+<p>The presence of 4 requests may seem odd, after all we only loaded one web page. But the page we loaded was html! Hypertext documents can link to other resources (images, etc) and the browser will go get them for the page. The server does not send you all the resources at once. The browser goes and fetches each resource which allows a page to be made of resources from multiple web servers. (If you want to view the HTML that produced the page you can at any time by pressing CTRL+U.)</p>
 
-  If you want to view the HTML that produced the page you can at any time by pressing CTRL+U.) It may seem counter intuative, but the webserver does not send all the images at the same time it sends the page. The browser is responsible for determining what additional resources the HTML file needs and then fetching each of them.</p>
+<p>It may seem counter intuitive, but the webserver does not send all the images at the same time it sends the page. The browser is responsible for determining what additional resources the HTML file needs and then fetching each of them.</p>
 
+<p>Clicking any of the entries in the the Network Inspecter will show more details about that request. Go ahead and <em class="tut_action">click the entry labeled '1'</em>. (Note that the entry appears as '1' because that is the last part of the URL.) The Inspecter should look like this.</p>
+<a href="/static/tutorial_1_inspector_details.png"><img src="/static/thumb.tutorial_1_inspector_details.png"/></a>
 
-<p>Clicking any of the entries in the table will show more details about that request.</p>
+<p>In the header's tab for the request we see information for General, Response Headers, and Request Headers. This data is the parsed headers. <em class="tut_action">Read over the headers</em> to see what type of data is sent with each message. Note that though Status Code appears in General, it is actually part of the Response Header, just as the URL and HTTP Method are really part of the Request header. They are just always there so they get pulled into their own listing.</p>
+<p>You should be able to see headers like "Content-Type" which tells the browser the format of the data being sent. If you check the "Content-Type" of one of the images that were transferred, you will see it has a different value. There is a header in Response for "Server", and a header in Request called "User-Agent"; These contain the name of the server's software (This site is running in a server called Werkzeug) and the name of your browser respectively.</p>
+
+<p>Headers can be named anything. But certain software expects there to be certain entries for things to work properly. We can also put a nearly unlimited number of header entries in each message, though in practice there are only several.</p>
+
+<p>Lastly, clicking on the Preview tab for request '1' will show you the html that was sent. The preview tab for images will show the image preview.</p>
+
+<h3>Closing</h3>
+<p>Hopefully this page has shed some light on the inner workings of the common act of opening a web page. </p>
+<p>You should have a basic grasp on:</p>
+<ul>
+  <li>HTTP transactions are a Request and a Response.</li>
+  <li>Headers describe data about the document being requested or returned.</li>
+  <li>How to view header information through your browser.</li>
+</ul>
+
+{% include "tutorial_nav.html" %}
+
 {% endblock %}
