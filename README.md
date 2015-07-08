@@ -30,7 +30,7 @@ The previous command will copy all of this project's files, including this readm
 ```
 sudo apt-get update
 sudo apt-get upgrade
-sudo apt-get install python3 pip3 libsqlite3-0
+sudo apt-get install python3  python3-pip libsqlite3-0
 sudo pip3 --upgrade install flask sqlalchemy flask-sqlalchemy ipython
 ```
 
