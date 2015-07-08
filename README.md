@@ -40,3 +40,4 @@ In the terminal run the following (replace things in { } with correct values)
 cd {path to http-rest-tutorial}
 ./main.py
 ```
+The server will start in the terminal you ran the command in. It will give you a URL like http://127.0.0.1:5000. Go there in a web browser and you will see the web page the server is hosting.
