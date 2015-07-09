@@ -1,0 +1,80 @@
+{% extends "tutorial_layout.html" %}
+{% block body %}
+
+<h3>MORE ON PASSING DATA TO THE SERVER</h3>
+
+<p>Last time we introduced the idea of passing information to the server with an http request, and introduced a method of doing it with URL arguments. This time we will talk about a 2nd way of sending data along with the HTTP Request.</p>
+
+<p>As described earlier, URL arguments are passed in the URL which appears in the HTTP Request's headers. One other way we could send data is to just put entries in the HTTP Request header. However, this causes two major problem. The first issue is collisions of header names: You could not pass your own "User-Agent" header since that is used by the browser. The other issue is that any field you put in the header is indistinguishable from information the browser put in the header.</p>
+
+<p>The best solution is to send data in the HTTP Request's Body, as it is otherwise not used. We just put a header entry saying the Request's body type and then put data of that type in the Request body.</p>
+
+<p>The most common type of data sent this way is called 'Form' data. It looks just like the URL argument data: "parameter=value&amp;also=another". A benefit of this method is it does not interfere with data passed through URL arguments: You can pass a parameter called 'testparam' to the server through URL arguments and Form data at the same time.</p>
+
+<h3>TWO WAYS TO PASS DATA, WHICH SHOULD YOU USE?</h3>
+
+<p>A common question is what data should be passed through URL args and what should be passed through the Request body. It is common to use only URL arguments when making HTTP GET requests. The other types of HTTP requests (POST, PUT, and DELETE. These will be covered in the next page) are often used with data in the Request body. It is also suggested against putting data like passwords into URL parameters. A benefit of not putting sensitive data into the URL parameters is that no one can see it from looking at your web browser's history or other logs that store visited URLs. (Note that sending data with the Request header does not make it secure. Unencrypted traffic sends the full http transaction in plain text)</p>
+
+<h3>UNFORTUNATE NAME</h3>
+<p>As mentioned in the last page, URL arguments are called GET parameters/arguments because they are used most commonly by GET requests. Similarly, data in the Request Body is often used by POST requests and are therefore commonly called POST data/parameters/arguments. These names can be easy to confuse with the HTTP methods they get their name from, but the names are unfortunately pretty common since 'POST data' is easier to say than 'Form encoded Request Body data'.</p>
+
+<h3>INTERACTIVE EXAMPLE</h3>
+
+<p>In this example I have the HTML form that submits its data to the server as Form data instead of URL arguments. Unfortunately due to a limitation of current HTML standards the best way illustrate what I want to get across is to make a POST request. The purpose of POST requests will be explained in later pages. In terms of the HTTP Request, all that is different between a GET and POST request is a single header that says 'POST' instead of 'GET'.</p>
+
+<p><em class="tut_action">Open the browser's Inspector (F12 or CMD+Option+I on Mac), go to the Network tab. Then fill out the form below with any data you want and hit SUBMIT.</em> After you press SUBMIT the rest of the tutorial will appear, but the form and this message will not disappear because you can not change the values in the URL like in the URL Argument example on the last page.</p>
+
+<p>
+  <form action="" method="POST">
+    <input type="hidden" name="submitted" value="yes"/>
+    <dl>
+      <dt>Name:</dt>
+      <dd><input type="text" name="firstname"/></dd>
+      <dt>Age:</dt>
+      <dd><input type="text" name="age"/></dd>
+      <dt>State/City of Residence:</dt>
+      <dd><input type="text" name="state"/></dd>
+    </dl>
+    <input type="submit" value="SUBMIT"/>
+  </form>
+</p>
+
+{% if request.form.get("submitted") == "yes" %}
+<hr/>
+<h3>THE REST OF THE TUTORIAL</h3>
+<p>Using the the FORM data sent with the HTTP Request's body, I can construct the following message on the Server and send it to you.</p>
+
+<p>Hello {{ request.form.get('firstname') or '[Subject Name Here]' }},<br>
+  Good job not dying for {{ request.form.get('age') or '[Subject Age Here]' }} years. It must be tough being {{ request.form.get('age') or '[Subject Age Here]' }} while living in {{ request.form.get('state') or '[Subject Location Here]' }}.</p>
+
+<p>In the network inspector you should see a POST request labeled '{{ tut_num }}' (That is the last part of the hierarchical URL). <em class="tut_action">Click the POST request labeled '{{ tut_num }}' in the Network Inspector.</em> In Chrome, Form data is shown in the Headers tab of the HTTP Request. In Firefox you have to go to the 'Params' tab of the HTTP Request.</p>
+
+<p><em class="tut_action">Check theFform data in the inspecter.</em> The Form data should be the same data you just entered, plus an additional field called 'submitted'. Google Chrome allows you to see the raw unformatted Request Body which is just the standard "key1=value1&amp;key2=value2" syntax. Check the raw Form data if you want.</p>
+
+<h3>HOW BROWSERS TREAT PAGES WITH FORM DATA</h3>
+<p>Usually when a HTTP request has Form data, it is being used to do an action beyond just fetching a resource. Because of this, refreshing such a page will often cause the browser to ask if you are sure you want to resubmit the Form data. <em class="tut_action">Refresh the page. Firefox should immediately give you the warning. For Chrome, I had to click in the URL bar and then hit CTRL+R for it to give me the message.</em> Now you know the meaning of This warning message most internet users bump into while refreshing a slow page after submitting an order online. </p>
+
+<h3>OTHER DATA CAN BE SENT IN THE REQUEST BODY</h3>
+<p>Form data is just one of the types of data that can be loaded into the HTTP Request Body, and is identified with the HTTP Request header Content-Type:application/x-www-form-urlencoded. Any data can be passed through the Request Body. Common alternatives to Form data are JSON and XML data. When you upload pictures to the internet, those pictures are loaded into a Request Header. HTTP even supports a Request Content-Type of 'multipart' which allows sending multiple distinct files at a time. Multipart Requests allow you to do things like upload multiple files at once.</p>
+
+<h3>REQUEST BODY DATA WITH cURL</h3>
+<p> Skip this if you are not interested. cURL can make HTTP requests with Request Body data pretty easily. The --data option allows you to specify what to send.</p>
+
+<p><code>curl -v --data "submitted=yes&amp;firstname={{ request.form.get('firstname') }}&amp;age={{ request.form.get('age') }}&amp;state={{ request.form.get('state') }}" http://{{request.host+request.path}}</code></p>
+
+<p>cURL sadly will not show you the Request body. If you are really interested in seeing the full http message look at <a href="http://superuser.com/questions/291424/how-do-you-display-post-data-with-curl">this thread's</a> post by Dori. Or you could look into using Wireshark to catch raw network packets.</p>
+
+<h3>CLOSING</h3>
+<p>There are two main ways to send data to a server with an HTTP Request: URL Arguments, and data loaded into the HTTP Request's body.<br>
+  URL Arguments are often called GET parameters.<br>
+  Data loaded into the Request body can be of any type and comes with a header saying what type of data it is.<br>
+  Request Body data is often Form encoded data (looks just like URL encoded data: key=value&amp;key=value).<br>
+  Request Body data is often called POST data.
+  Request Body data can be viewed with the Browser's inspector.
+</p>
+
+{% endif %}
+
+{% include "tutorial_nav.html" %}
+
+{% endblock %}

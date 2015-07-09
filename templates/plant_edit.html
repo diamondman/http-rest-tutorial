@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
-{% block body %}
-
+{% block head %}
 <script>
   function update_plant() {
       if(confirm("Are you sure you want to update this plant?")){
@@ -22,8 +21,9 @@
       }
   }
 </script>
+{% endblock %}
 
-
+{% block body %}
 <a href="/plant/{{entry.id}}"> <== back </a>
 		      
 <form action="/plant" method="post" class="add-entry" name="update_plant_form">

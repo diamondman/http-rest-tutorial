@@ -25,7 +25,7 @@
 {% block body %}
 <h3>PASSING DATA TO THE SERVER</h3>
 
-<p>A URL is supposed to specify a resource on a network. The most common way people use urls is treating them like file paths: folders delineated by '/' ending in a file name. There is no requirement that URLS operate strictly on this format beyond the slashes in http:// and the slash after the server's name. Using URLs as strict file hierarchys limits a lot of our flexibility with specifying resources; not all attributes of a resource can be specified hierarchically in any meaningful way.</p>
+<p>A URL is supposed to specify a resource on a network. The most common way people use URLs is treating them like file paths: folders delineated by '/' ending in a file name. There is no requirement that URLS operate strictly on this format beyond the slashes in http:// and the slash after the server's name. Using URLs as strict file hierarchies limits a lot of our flexibility with specifying resources; not all attributes of a resource can be specified hierarchically in any meaningful way.</p>
 
 <p>For example, say we are on www.mystore.com looking at a pink and black polkadot umbrella with a carrying case. We could have some url like http://mystore.com/products/umbrella/with-case/polkadot/pink/black. But if we treated the words between the slashes as folders, this ordering is arbitrary and an equally valid URL could be http://mystore.com/products/pink/black/polkadot/umbrella/with-case. With the URL treated as a file path, all these attributes need to be provided, and in the right order.</p>
 
@@ -40,7 +40,7 @@
 
 <p>This URL is completely valid and specifies arguments at the end. This whole URL is placed in the HTTP Request header for the web server to interpret. The syntax for the arguments has surprisingly simple rules:</p>
 <ul>
-  <li>Start with a hierarchial URL (http://www.mysite.com/search). This is the 'path' part of the URL.</li>
+  <li>Start with a hierarchical URL (http://www.mysite.com/search). This is the 'path' part of the URL.</li>
   <li>Switch from specifying a path to specifying arguments with a question mark (?).</li>
   <li>Follow the question mark with key=value pairs delineated with the ampersand (&). Example: age=24&gender=male&state=California</li>
 </ul>
@@ -95,7 +95,7 @@
 
 <h3>WHERE ARE URL ARGUMENTS USED?</h3>
 <p>Short answer: everywhere.<br>
-  <em class="tut_action">Go to google and do a search, then check the URL.</em> Google passes all sorts of information to their server with URL arguments, as do tons of sites. Keep a look out at the URL of pages you visit throughout the day and see what the site is sending. It is possible to mess with poorly designed sites by modifying the arguments in ways the designers did not anticipate.</p>
+  <em class="tut_action">Go to Google and do a search, then check the URL.</em> Google passes all sorts of information to their server with URL arguments, as do tons of sites. Keep a look out at the URL of pages you visit throughout the day and see what the site is sending. It is possible to mess with poorly designed sites by modifying the arguments in ways the designers did not anticipate.</p>
 
 <h3>CLOSING</h3>
 <p>After reading this you should be able to read and write arguments from and to URLs.<br> That is pretty much all I was going for.<br> It should also be clear that the http server is capable of producing different html based on these arguments.</p>

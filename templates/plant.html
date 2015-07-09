@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
-{% block body %} 
-
+{% block head %}
 <script>
   function delete_plant() {
       if(confirm("Are you sure you want to delete this plant?")){
@@ -16,7 +15,9 @@
       }
   }
 </script>
+{% endblock %}
 
+{% block body %} 
 <a href="/plant"> <== back </a>
 
 {% include "plant_description.html" %}
