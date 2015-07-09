@@ -3,6 +3,7 @@
   <head>
     <title>HTTP/REST Tutorial {{tut_num}}</title>
     <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    {% block head %}{% endblock %}
   </head>
   <body>
     <h1>HTTP/REST Tutorial {{tut_num}}</h1>
