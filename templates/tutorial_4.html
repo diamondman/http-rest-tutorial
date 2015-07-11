@@ -49,7 +49,7 @@
 
 <p>In the network inspector you should see a POST request labeled '{{ tut_num }}' (That is the last part of the hierarchical URL). <em class="tut_action">Click the POST request labeled '{{ tut_num }}' in the Network Inspector.</em> In Chrome, Form data is shown in the Headers tab of the HTTP Request. In Firefox you have to go to the 'Params' tab of the HTTP Request.</p>
 
-<p><em class="tut_action">Check theFform data in the inspecter.</em> The Form data should be the same data you just entered, plus an additional field called 'submitted'. Google Chrome allows you to see the raw unformatted Request Body which is just the standard "key1=value1&amp;key2=value2" syntax. Check the raw Form data if you want.</p>
+<p><em class="tut_action">Check the form data in the inspector.</em> The Form data should be the same data you just entered, plus an additional field called 'submitted'. Google Chrome allows you to see the raw unformatted Request Body which is just the standard "key1=value1&amp;key2=value2" syntax. Check the raw Form data if you want.</p>
 
 <h3>HOW BROWSERS TREAT PAGES WITH FORM DATA</h3>
 <p>Usually when a HTTP request has Form data, it is being used to do an action beyond just fetching a resource. Because of this, refreshing such a page will often cause the browser to ask if you are sure you want to resubmit the Form data. <em class="tut_action">Refresh the page. Firefox should immediately give you the warning. For Chrome, I had to click in the URL bar and then hit CTRL+R for it to give me the message.</em> Now you know the meaning of This warning message most internet users bump into while refreshing a slow page after submitting an order online. </p>
