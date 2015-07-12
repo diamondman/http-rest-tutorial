@@ -119,7 +119,7 @@ def plant_delete_view(plantid):
 def tutorials_view():
     return redirect("/tutorial/1")
 
-@app.route("/tutorial/<int:tut_num>")
+@app.route("/tutorial/<int:tut_num>", methods=["GET", "POST"])
 def tutorial_view(tut_num):
     """from bs4 import BeautifulSoup
     soup = BeautifulSoup(render_template("tutorial_%d.html"%tut_num, tut_num=tut_num),
