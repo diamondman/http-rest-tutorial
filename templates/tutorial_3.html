@@ -25,20 +25,58 @@
 {% block body %}
 <h3>PASSING DATA TO THE SERVER</h3>
 
-<p>A URL is supposed to specify a resource on a network. The most common way people use URLs is treating them like file paths: folders delineated by '/' ending in a file name. There is no requirement that URLS operate strictly on this format beyond the slashes in http:// and the slash after the server's name. Using URLs as strict file hierarchies limits a lot of our flexibility with specifying resources; not all attributes of a resource can be specified hierarchically in any meaningful way.</p>
+<p>
+  A URL is supposed to specify a resource on a network. The most
+  common way people use URLs is treating them like file paths: folders
+  delineated by '/' ending in a file name. There is no requirement
+  that URLS operate strictly on this format beyond the slashes in
+  http:// and the slash after the server's name. Using URLs as strict
+  file hierarchies limits a lot of our flexibility with specifying
+  resources; not all attributes of a resource can be specified
+  hierarchically in any meaningful way.
+</p>
 
-<p>For example, say we are on www.mystore.com looking at a pink and black polkadot umbrella with a carrying case. We could have some url like http://mystore.com/products/umbrella/with-case/polkadot/pink/black. But if we treated the words between the slashes as folders, this ordering is arbitrary and an equally valid URL could be http://mystore.com/products/pink/black/polkadot/umbrella/with-case. With the URL treated as a file path, all these attributes need to be provided, and in the right order.</p>
+<p>
+  For example, say we are on www.mystore.com looking at a pink and
+  black polkadot umbrella with a carrying case. We could have some url
+  like
+  http://mystore.com/products/umbrella/with-case/polkadot/pink/black. But
+  if we treated the words between the slashes as folders, this
+  ordering is arbitrary and an equally valid URL could be
+  http://mystore.com/products/pink/black/polkadot/umbrella/with-case. With
+  the URL treated as a file path, all these attributes need to be
+  provided, and in the right order.
+</p>
 
-<p>A situation more people are likely to have experienced is organizing papers and projects from school. Should the hierarchy be Year/Semester/Subject/Teacher/Project? Or Subject/Year/Semester/Project? There is at least one person who has used each of these folder hierarchies, and everyone runs into the difficulty that strictly fitting  things in such a hierarchy makes it difficult to find things based on a different criteria.</p>
+<p>
+  A situation more people are likely to have experienced is organizing
+  papers and projects from school. Should the hierarchy be
+  Year/Semester/Subject/Teacher/Project? Or
+  Subject/Year/Semester/Project? There is at least one person who has
+  used each of these folder hierarchies, and everyone runs into the
+  difficulty that strictly fitting things in such a hierarchy makes it
+  difficult to find things based on a different criteria.
+</p>
 
-<p>For resources on the web like products in an online store, an identification number is often used to avoid all the hierarchy hassle (something likehttp://mystore.com/products/1234). And then we use search functionality to find the id.</p>
+<p>
+  For resources on the web like products in an online store, an
+  identification number is often used to avoid all the hierarchy
+  hassle (something likehttp://mystore.com/products/1234). And then we
+  use search functionality to find the id.
+</p>
 
 <h3>ARGUMENT DATA</h3>
-<p>Searching is a common case that can not be handled well by a hierarchical URL path. The solution is to use the flexibility of the URL to add unordered (key-value) data. Here is an example URL for an example 'advanced search' on our fake mystore.com storefront.</p>
+<p>
+  Searching is a common case that can not be handled well by a
+  hierarchical URL path. The solution is to use the flexibility of the
+  URL to add unordered (key-value) data. Here is an example URL for an
+  example 'advanced search' on our fake mystore.com storefront.
+</p>
 
-<pre><code>http://mystore.com/search?type=umbrella&with-case=yes&pattern=polkadot&colors=pink,black</code></pre>
+<pr e><code>http://mystore.com/search?type=umbrella&with-case=yes&pattern=polkadot&colors=pink,black</code></pre>
 
-<p>This URL is completely valid and specifies arguments at the end. This whole URL is placed in the HTTP Request header for the web server to interpret. The syntax for the arguments has surprisingly simple rules:</p>
+<p>This URL is completely valid and specifies arguments at the end. This whole URL is placed in the HTTP Request header for the web server to interpret. The syntax for the arguments has surprisingly simple rules:
+</p>
 <ul>
   <li>Start with a hierarchical URL (http://www.mysite.com/search). This is the 'path' part of the URL.</li>
   <li>Switch from specifying a path to specifying arguments with a question mark (?).</li>
@@ -59,7 +97,8 @@
 
 <hr/>
 <h3>THE REST OF THE TUTORIAL</h3>
-<p>Good work, {{ request.args.get('firstname') }}.
+<p>
+  Good work, {{ request.args.get('firstname') }}.
   <script type="text/javascript">
     if(check_swear(gup("firstname", document.location))){
       document.write("<strong>(Also shame on you :])</strong>");
@@ -67,12 +106,27 @@
   </script>
 
   <br>
-  When you clicked the SUBMIT button, the browser submitted a 'form' with the GET method to 'http://{{request.host+request.path}}' and added the data from the 'firstname' field of the form as an argument to the url. If you look at the URL it should now have '?firstname={{ request.args.get('firstname') }}' at the end. The server hosting this page read the full url and split the path part from the arguments. The website code then used those arguments to produce this page. </p>
+  When you clicked the SUBMIT button, the browser submitted a 'form'
+  with the GET method to 'http://{{request.host+request.path}}' and
+  added the data from the 'firstname' field of the form as an argument
+  to the url. If you look at the URL it should now have '?firstname={{
+  request.args.get('firstname') }}' at the end. The server hosting
+  this page read the full url and split the path part from the
+  arguments. The website code then used those arguments to produce
+  this page.
+</p>
 
 <p><em class="tut_action">Try changing the name in the url then hitting enter.</em></p>
-<p>Once you do, your name should changed in the page.</p> You can also add additional arguments.</p>
+<p>Once you do, your name should changed in the page.</p>
+<p>You can also add additional arguments.</p>
 
-<p>Here is a list of all the URL arguments you have specified in the URL. <em class="tut_action">Add additional arguments to the URL following the rules from above. Check they appear in the list below.</em> Note that the server is generating html based on the arguments you provide in the URL.</p>
+<p>
+  Here is a list of all the URL arguments you have specified in the
+  URL. <em class="tut_action">Add additional arguments to the URL
+  following the rules from above. Check they appear in the list
+  below.</em> Note that the server is generating html based on the
+  arguments you provide in the URL.
+</p>
 
 <table class="entries" border="1">
   <thead>
@@ -91,14 +145,32 @@
   </tbody>
 </table>
 
-<p>Because these type of arguments are often used with GET requests they are sometimes called 'GET Parameters.' I happen to think this name is very confusing, and several web servers (including the one hosting this site) uses the name 'arguments' for sanity sake.</p>
+<p>
+  Because these type of arguments are often used with GET requests
+  they are sometimes called 'GET Parameters.' I happen to think this
+  name is very confusing, and several web servers (including the one
+  hosting this site) uses the name 'arguments' for sanity sake.
+</p>
 
 <h3>WHERE ARE URL ARGUMENTS USED?</h3>
 <p>Short answer: everywhere.<br>
-  <em class="tut_action">Go to Google and do a search, then check the URL.</em> Google passes all sorts of information to their server with URL arguments, as do tons of sites. Keep a look out at the URL of pages you visit throughout the day and see what the site is sending. It is possible to mess with poorly designed sites by modifying the arguments in ways the designers did not anticipate.</p>
+  <em class="tut_action">
+    Go to Google and do a search, then check the URL.
+  </em>
+  Google passes all sorts of information to their server with URL
+  arguments, as do tons of sites. Keep a look out at the URL of pages
+  you visit throughout the day and see what the site is sending. It is
+  possible to mess with poorly designed sites by modifying the
+  arguments in ways the designers did not anticipate.
+</p>
 
 <h3>CLOSING</h3>
-<p>After reading this you should be able to read and write arguments from and to URLs.<br> That is pretty much all I was going for.<br> It should also be clear that the http server is capable of producing different html based on these arguments.</p>
+<p>
+  After reading this you should be able to read and write arguments
+  from and to URLs.<br> That is pretty much all I was going for.<br>
+  It should also be clear that the http server is capable of producing
+  different html based on these arguments.
+</p>
 
 {% endif %}
 

@@ -2,37 +2,90 @@
 {% block body %}
 <h3>HTTP CLIENTS</h3>
 
-<p>In the last Tutorial, we explored the web browser making HTTP GET requests. We looked at the content of the request and response messages, learned about the hidden metadata in HTTP Headers, and how to use the web browser's inspector to view details about HTTP requests. </p>
+<p>
+  In the last Tutorial, we explored the web browser making HTTP GET
+  requests. We looked at the content of the request and response
+  messages, learned about the hidden metadata in HTTP Headers, and how
+  to use the web browser's inspector to view details about HTTP
+  requests.
+</p>
 
-<p>However the actual act of making an HTTP request remains somewhat nebulous; something that the browser does for us. I will try to show you that handling an HTTP transaction is the least impressive thing the browser does.</p>
+<p>
+  However the actual act of making an HTTP request remains somewhat
+  nebulous; something that the browser does for us. I will try to show
+  you that handling an HTTP transaction is the least impressive thing
+  the browser does.
+</p>
 
 <h3>TCP AND YOU</h3>
 
-<p>A little background on the technology that HTTP uses under the hood: TCP/IP. Feel free to skip this if you are familiar with TCP.</p>
+<p>
+  A little background on the technology that HTTP uses under the hood:
+  TCP/IP. Feel free to skip this if you are familiar with TCP.
+</p>
 
-<p>HTTP is based on TCP (Transmission Control Protocol). All TCP does is let two computers talk over an IP (Internet Protocol) Network. It handles slicing huge messages into multiple packets, getting all those packets to the other machine, and making sure the packets are all there and in order. TCP also checks that each packet does not have errors and lets the destination computer tell the source computer that a packet needs to be resent.</p>
+<p>
+  HTTP is based on TCP (Transmission Control Protocol). All TCP does
+  is let two computers talk over an IP (Internet Protocol) Network. It
+  handles slicing huge messages into multiple packets, getting all
+  those packets to the other machine, and making sure the packets are
+  all there and in order. TCP also checks that each packet does not
+  have errors and lets the destination computer tell the source
+  computer that a packet needs to be resent.
+</p>
 
-<p>An open TCP connection is similar to an active phone call: both people can hear each other, it is usually a one-on-one call, and if anyone can't hear the other person, the misheard speaker can speak again. If you have an open TCP connection (called a socket) to another computer any data you shove into the open socket comes out the other end, and vice versa.</p>
+<p>
+  An open TCP connection is similar to an active phone call: both
+  people can hear each other, it is usually a one-on-one call, and if
+  anyone can't hear the other person, the misheard speaker can speak
+  again. If you have an open TCP connection (called a socket) to
+  another computer any data you shove into the open socket comes out
+  the other end, and vice versa.
+</p>
 
 <h3>BACK TO HTTP</h3>
 
-<p>HTTP relies directly on TCP to send its messages and only defines a format of what to send. Therefore there is nothing special about a browser that lets it send an HTTP message. There are multiple browsers that all handle HTTP connections equally well, as well as other programs that are not even browsers.</p>
+<p>
+  HTTP relies directly on TCP to send its messages and only defines a
+  format of what to send. Therefore there is nothing special about a
+  browser that lets it send an HTTP message. There are multiple
+  browsers that all handle HTTP connections equally well, as well as
+  other programs that are not even browsers.
+</p>
 
 <h3>ENTER cURL</h3>
 
-<p>cURL (Client for URL) is a fairly simple Linux/Unix/etc program for making HTTP requests (as well as a plethora of other protocols including FTP and even mail protocols).</p>
+<p>
+  cURL (Client for URL) is a fairly simple Linux/Unix/etc program for
+  making HTTP requests (as well as a plethora of other protocols
+  including FTP and even mail protocols).
+</p>
 <p><em class="tut_action">Run the following command on the command line.</em></p>
 
 <pre><code>curl http://127.0.0.1:5000/tutorial/2</code></pre>
 
-<p>You should get a huge blob of text spit out on your terminal. If you look through it this is the same HTML for this page. <em class="tut_action">(You can verify this if you want by hitting CTRL+U (⌘-Option-U on Mac)).</em> All cURL does is spit out the body of the HTTP response, be it html, image data, a video, whatever.</p>
+<p>
+  You should get a huge blob of text spit out on your terminal. If you
+  look through it this is the same HTML for this
+  page. <em class="tut_action">(You can verify this if you want by
+  hitting CTRL+U (⌘-Option-U on Mac)).</em> All cURL does is spit out
+  the body of the HTTP response, be it html, image data, a video,
+  whatever.
+</p>
 
-<p>cURL only showed us the body, but it is sending and receiving headers in the HTTP messages too. We can view them by passing the -v flag to cURL. </p>
+<p>
+  cURL only showed us the body, but it is sending and receiving
+  headers in the HTTP messages too. We can view them by passing the -v
+  flag to cURL.
+</p>
 <p><em class="tut_action">Run the following command on the command line.</em></p>
 
 <pre><code>curl -v http://127.0.0.1:5000/tutorial/2</code></pre>
 
-<p>The same blob of HTML will fill your terminal, but at the top is something new.</p>
+<p>
+  The same blob of HTML will fill your terminal, but at the top is
+  something new.
+</p>
 
 <pre><code>
     * Hostname was NOT found in DNS cache
@@ -53,10 +106,18 @@
     A BUNCH OF HTML
 </code></pre>
 
-<p>All the lines starting with '&gt;' are part of the request data sent to the server. All lines starting with '&lt;' are part of the response data sent back from the server. Lines starting with '*' are just debug messages from cURL and were not in any message.</p>
+<p>
+  All the lines starting with '&gt;' are part of the request data sent
+  to the server. All lines starting with '&lt;' are part of the
+  response data sent back from the server. Lines starting with '*' are
+  just debug messages from cURL and were not in any message.
+</p>
 
 <h3>WRAPPING UP HTTP/TCP</h3>
-<p>Were you up to the task you could write a simple HTTP client or server program in C or Python.</p>
+<p>
+  Were you up to the task you could write a simple HTTP client or
+  server program in C or Python.
+</p>
 
 CLIENT:
 <ol>
@@ -71,15 +132,41 @@ SERVER:
   <li>Send your response headers and response body back through the socket.</li>
 </ol>
 
-<p>The machine your program is talking to would not know any better as long as you sent the headers correctly. All you would need is some error checking and you have a valid and compliant HTTP server or client.</p>
+<p>
+  The machine your program is talking to would not know any better as
+  long as you sent the headers correctly. All you would need is some
+  error checking and you have a valid and compliant HTTP server or
+  client.
+</p>
 
-<p>Many people try to avoid having to write programs that handle raw HTTP connections because they would rather be building a website. However some people actually write programs like this, and turn them into libraries or frameworks for others to use later.</p>
+<p>
+  Many people try to avoid having to write programs that handle raw
+  HTTP connections because they would rather be building a
+  website. However some people actually write programs like this, and
+  turn them into libraries or frameworks for others to use later.
+</p>
 
-<p>This webpage, for example, is running on a server written in Python called Werkzeug which makes some clever structures in code for receiving, parsing, and manipulating HTTP requests, as well as generating and sending HTTP responses back down the TCP socket to whatever client started the connection.</p>
+<p>
+  This webpage, for example, is running on a server written in Python
+  called Werkzeug which makes some clever structures in code for
+  receiving, parsing, and manipulating HTTP requests, as well as
+  generating and sending HTTP responses back down the TCP socket to
+  whatever client started the connection.
+</p>
 
 <h3>CLOSING</h3>
-<p>The point of this page was to hammer home that a program being able to send and receive HTTP messages is nothing to write home about, as well as demonstrate some alternatives to using a browser to open a URL.</p>
-<p>cURL and similar programs are very useful in debugging or writing script to automate your own work, and understanding the basics of how to use it, as well as the relatively simple things it is doing can be very useful. </p>
+<p>
+  The point of this page was to hammer home that a program being able
+  to send and receive HTTP messages is nothing to write home about, as
+  well as demonstrate some alternatives to using a browser to open a
+  URL.
+</p>
+<p>
+  cURL and similar programs are very useful in debugging or writing
+  script to automate your own work, and understanding the basics of
+  how to use it, as well as the relatively simple things it is doing
+  can be very useful.
+</p>
 
 {% include "tutorial_nav.html" %}
 {% endblock %}

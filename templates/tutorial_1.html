@@ -7,38 +7,108 @@
 
 <p>For anyone who does not know, let's define a few terms before going forward.</p>
 <ul>
-  <li><strong>Hypertext:</strong> A document displayed on a computer that has links to other documents and supports embedding resources like pictures. Web pages are the most common example of Hypertext.</li>
-  <li><strong>Hypertext Markup Language (HTML):</strong> A set of symbols and words that form a language for describing the structure of a hypertext document (webpage). For example, to make something bold in HTML we can write &lt;strong&gt;something bold&lt;/strong&gt;. Web browsers read HTML, interpret these 'tags' and build the web page to display to us.</li>
-  <li><strong>Hypertext Transfer Protocol (HTTP):</strong> A protocol to send hypertext documents between two computers (usually a client and a server). As the name implies, HTTP was primarily made for transferring HTML; however other types of data can be transferred. This is why most URLs start with 'http://', it tells the web browser what protocol to talk to the server with.</li>
+  <li><strong>Hypertext:</strong>
+    A document displayed on a computer that has links to other documents and supports embedding resources like pictures. Web pages are the most common example of Hypertext.
+  </li>
+  <li><strong>Hypertext Markup Language (HTML):</strong>
+    A set of symbols and words that form a language for describing the structure of a hypertext document (webpage). For example, to make something bold in HTML we can write &lt;strong&gt;something bold&lt;/strong&gt;. Web browsers read HTML, interpret these 'tags' and build the web page to display to us.
+  </li>
+  <li><strong>Hypertext Transfer Protocol (HTTP):</strong>
+    A protocol to send hypertext documents between two computers (usually a client and a server). As the name implies, HTTP was primarily made for transferring HTML; however other types of data can be transferred. This is why most URLs start with 'http://', it tells the web browser what protocol to talk to the server with.
+  </li>
 </ul>
 
 <h3>HTTP GET, you use it all the time.</h3>
 
-<p>From these definitions and years of using a web browser, it is hopefully clear what I mean when I say you made a http request (tried to load a web page) and got a response (the page loaded). The potentially new idea is the 'HTTP Method'. The 'method' is just a work sent to the server with every HTTP request, along with the URL. You can think of it as what to do with the url. For now we will stick with one method type: 'GET'. GET simply means 'send me back the resource specified by the URL.' </p>
+<p>
+  From these definitions and years of using a web browser, it is
+  hopefully clear what I mean when I say you made a http request (tried
+  to load a web page) and got a response (the page loaded). The
+  potentially new idea is the 'HTTP Method'. The 'method' is just a work
+  sent to the server with every HTTP request, along with the URL. You
+  can think of it as what to do with the url. For now we will stick with
+  one method type: 'GET'. GET simply means 'send me back the resource
+  specified by the URL.'
+</p>
 
-<p>Every time you type a website URL into your address bar and hit enter (or otherwise navigate to a web page) you are sending an HTTP GET request to a server. If you get anything back besides 'timeout' or 'host not found' then you received an HTTP response from the server. Even errors like '404 file not found' are responses from the server; the server told you it does not have that file.</p>
+<p>
+  Every time you type a website URL into your address bar and hit
+  enter (or otherwise navigate to a web page) you are sending an HTTP
+  GET request to a server. If you get anything back besides 'timeout'
+  or 'host not found' then you received an HTTP response from the
+  server. Even errors like '404 file not found' are responses from the
+  server; the server told you it does not have that file.
+</p>
 
 <h3>Required Details About HTTP</h3>
 
-<p>Messages in http can contain two main parts: <strong>Headers</strong>, and a <strong>Body</strong>. Headers are metadata: details about the message but not the actual payload of the message itself. The body is the actual document being sent.</p>
+<p>
+  Messages in http can contain two main
+  parts: <strong>Headers</strong>, and
+  a <strong>Body</strong>. Headers are metadata: details about the
+  message but not the actual payload of the message itself. The body
+  is the actual document being sent.
+</p>
 
-<p>HTTP Requests often contain only headers (we will go into what would be in a request body in page 4). These headers specify the URL and HTTP Method we are asking the web server to give us. </p>
-<p>HTTP Responses contain headers and a body. The Body is the content of a file (HTML, an image, etc). The headers describe the body, giving details like Status code (200 success, 404 file not found), and format of the body (is it html, or an image, etc).
+<p>
+  HTTP Requests often contain only headers (we will go into what would
+  be in a request body in page 4). These headers specify the URL and
+  HTTP Method we are asking the web server to give us.
+</p>
+<p>
+  HTTP Responses contain headers and a body. The Body is the content
+  of a file (HTML, an image, etc). The headers describe the body,
+  giving details like Status code (200 success, 404 file not found),
+  and format of the body (is it html, or an image, etc).
 
-  The response contained the HTML for this page, but the response contained something else too; metadata about the page called <strong>Headers</strong>. The request from the browser also contains headers, but these headers specify the url and HTTP Method we are asking the server for.</p>
+  The response contained the HTML for this page, but the response
+  contained something else too; metadata about the page
+  called <strong>Headers</strong>. The request from the browser also
+  contains headers, but these headers specify the url and HTTP Method
+  we are asking the server for.
+</p>
 
 <h3>Your Browser and HTTP</h3>
-<p>When your browser sent the HTTP request to load this page, it got back an HTTP response. The browser checked the the headers of the response and determined that the page was HTML. Next the browser grabbed the Body data from the response and interpreted it as html to build the page you see before you.</p>
+<p>
+  When your browser sent the HTTP request to load this page, it got
+  back an HTTP response. The browser checked the the headers of the
+  response and determined that the page was HTML. Next the browser
+  grabbed the Body data from the response and interpreted it as html
+  to build the page you see before you.
+</p>
 
-<p>Metadata about webpages that is not displayed in the page itself may seem weird, but we can actually look at the details of all http messages that pass through the browser. We will do this with what is called the Browser's <strong>Inspecter</strong>.</p>
+<p>
+  Metadata about webpages that is not displayed in the page itself may
+  seem weird, but we can actually look at the details of all http
+  messages that pass through the browser. We will do this with what is
+  called the Browser's <strong>Inspecter</strong>.
+</p>
 
-<p>Most modern browsers have features for web developers to debug the webpage. The <strong>Inspecter</strong> is the primary tool. The inspector lets you do many things including see the details of HTTP requests and responses.</p>
+<p>
+  Most modern browsers have features for web developers to debug the
+  webpage. The <strong>Inspecter</strong> is the primary tool. The
+  inspector lets you do many things including see the details of HTTP
+  requests and responses.
+</p>
 
 <p><strong>Follow along as we inspect the http requests that made this page possible.</strong></p>
 
-<p>If you are in Firefox or Google Chrome, <em class="tut_action">hit the F12 key (Command+Option+I on mac)</em> to open up the Inspector pane1. The Inspecter pane should appear in the bottom of your browser. <em class="tut_action">Click the <strong>Network</strong> tab</em> to open the Network Inspecter.</p>
+<p>
+  If you are in Firefox or Google Chrome, <em class="tut_action">hit
+  the F12 key (Command+Option+I on mac)</em> to open up the Inspector
+  pane1. The Inspecter pane should appear in the bottom of your
+  browser. <em class="tut_action">Click the <strong>Network</strong>
+  tab</em> to open the Network Inspecter.
+</p>
 
-<p>The Network Inspecter will be blank. The Network Inspecter has to be on to monitor HTTP activity, so it did not catch when you first loaded the page. <em class="tut_action">Refresh the whole page</em> so the inspecter can intercept the messages.. Once that is done you should see something like the following (You might want to open it in a new tab):</p>
+<p>
+  The Network Inspecter will be blank. The Network Inspecter has to be
+  on to monitor HTTP activity, so it did not catch when you first
+  loaded the page. <em class="tut_action">Refresh the whole page</em>
+  so the inspecter can intercept the messages.. Once that is done you
+  should see something like the following (You might want to open it
+  in a new tab):
+</p>
 <a href="/static/tutorial_1_inspector.png"><img src="/static/thumb.tutorial_1_inspector.png"/></a>
 
 <p>In the network inspector you should be able to see four requests for this page.</p>
@@ -48,22 +118,71 @@
   <li><strong>thumb.tutorial_1_inspector.png</strong> - The previous image</li>
   <li><strong>thumb.tutorial_1_inspector_details.png</strong> - The Next image</li>
 </ul>
-<p>The presence of 4 requests may seem odd, after all we only loaded one web page. But the page we loaded was html! Hypertext documents can link to other resources (images, etc) and the browser will go get them for the page. The server does not send you all the resources at once. The browser goes and fetches each resource which allows a page to be made of resources from multiple web servers. (If you want to view the HTML that produced the page you can at any time by pressing CTRL+U.)</p>
+<p>
+  The presence of 4 requests may seem odd, after all we only loaded
+  one web page. But the page we loaded was html! Hypertext documents
+  can link to other resources (images, etc) and the browser will go
+  get them for the page. The server does not send you all the
+  resources at once. The browser goes and fetches each resource which
+  allows a page to be made of resources from multiple web servers. (If
+  you want to view the HTML that produced the page you can at any time
+  by pressing CTRL+U.)
+</p>
 
-<p>It may seem counter intuitive, but the webserver does not send all the images at the same time it sends the page. The browser is responsible for determining what additional resources the HTML file needs and then fetching each of them.</p>
+<p>
+  It may seem counter intuitive, but the webserver does not send all
+  the images at the same time it sends the page. The browser is
+  responsible for determining what additional resources the HTML file
+  needs and then fetching each of them.
+</p>
 
-<p>Clicking any of the entries in the the Network Inspecter will show more details about that request. Go ahead and <em class="tut_action">click the entry labeled '1'</em>. (Note that the entry appears as '1' because that is the last part of the URL.) The Inspecter should look like this.</p>
+<p>
+  Clicking any of the entries in the the Network Inspecter will show
+  more details about that request. Go ahead
+  and <em class="tut_action">click the entry labeled '1'</em>. (Note
+  that the entry appears as '1' because that is the last part of the
+  URL.) The Inspecter should look like this.
+</p>
 <a href="/static/tutorial_1_inspector_details.png"><img src="/static/thumb.tutorial_1_inspector_details.png"/></a>
 
-<p>In the header's tab for the request we see information for General, Response Headers, and Request Headers. This data is the parsed headers. <em class="tut_action">Read over the headers</em> to see what type of data is sent with each message. Note that though Status Code appears in General, it is actually part of the Response Header, just as the URL and HTTP Method are really part of the Request header. They are just always there so they get pulled into their own listing.</p>
-<p>You should be able to see headers like "Content-Type" which tells the browser the format of the data being sent. If you check the "Content-Type" of one of the images that were transferred, you will see it has a different value. There is a header in Response for "Server", and a header in Request called "User-Agent"; These contain the name of the server's software (This site is running in a server called Werkzeug) and the name of your browser respectively.</p>
+<p>
+  In the header's tab for the request we see information for General,
+  Response Headers, and Request Headers. This data is the parsed
+  headers. <em class="tut_action">Read over the headers</em> to see
+  what type of data is sent with each message. Note that though Status
+  Code appears in General, it is actually part of the Response Header,
+  just as the URL and HTTP Method are really part of the Request
+  header. They are just always there so they get pulled into their own
+  listing.
+</p>
+<p>
+  You should be able to see headers like "Content-Type" which tells
+  the browser the format of the data being sent. If you check the
+  "Content-Type" of one of the images that were transferred, you will
+  see it has a different value. There is a header in Response for
+  "Server", and a header in Request called "User-Agent"; These contain
+  the name of the server's software (This site is running in a server
+  called Werkzeug) and the name of your browser respectively.
+</p>
 
-<p>Headers can be named anything. But certain software expects there to be certain entries for things to work properly. We can also put a nearly unlimited number of header entries in each message, though in practice there are only several.</p>
+<p>
+  Headers can be named anything. But certain software expects there to
+  be certain entries for things to work properly. We can also put a
+  nearly unlimited number of header entries in each message, though in
+  practice there are only several.
+</p>
 
-<p>Lastly, clicking on the Preview tab for request '1' will show you the html that was sent. The preview tab for images will show the image preview.</p>
+<p>
+  Lastly, clicking on the Preview tab for request '1' will show you
+  the html that was sent. The preview tab for images will show the
+  image preview.
+</p>
 
 <h3>CLOSING</h3>
-<p>Hopefully this page has shed some light on the inner workings of the common act of opening a web page. </p>
+<p>
+  Hopefully this page has shed some light on the inner workings of the
+  common act of opening a web page.
+</p>
 <p>You should have a basic grasp on:</p>
 <ul>
   <li>HTTP transactions are a Request and a Response.</li>
